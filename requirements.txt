@@ -1,0 +1,4 @@
+PyAutoGUI
+pywebview
+devgoldyutils=>2.0.1
+pygame

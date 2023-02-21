@@ -1,0 +1,9 @@
+body {
+    font-family: Ubuntu;
+    background-color: goldenrod;
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url("./fonts/Ubuntu/font.ttf");
+}
