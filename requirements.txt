@@ -1,4 +1,4 @@
 PyAutoGUI
-pywebview
-devgoldyutils=>2.0.1
+pywebview>=4.0.2
+devgoldyutils>=2.0.1
 pygame
