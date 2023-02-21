@@ -33,7 +33,7 @@ class AnnoyingCat():
             width=300,
             height=300,
             resizable=False,
-            on_top=True,
+            
             js_api=JSApi(cat),
 
             url="./web/index.html"
