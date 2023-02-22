@@ -7,7 +7,7 @@ mixer.init()
 
 class Meows(Enum):
     def __init__(self, meow_value:str):
-        self.logger = LoggerAdapter(annoying_cat_logger, prefix="MeowManager")
+        self.logger = LoggerAdapter(annoying_cat_logger, prefix="Meows")
         mixer.init()
 
     def play(self, volume:float):
