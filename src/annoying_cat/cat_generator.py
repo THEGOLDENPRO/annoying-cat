@@ -36,17 +36,16 @@ class CatGenerator():
 
         cat = Cat(
             name = cat_dict["name"],
-            gender = cat_dict["gender"]
-        )
+            gender = cat_dict["gender"],
+            window = webview.create_window(
+                title=cat_dict["name"],
+                width=300,
+                height=300,
+                resizable=False,
+                on_top=True,
 
-        cat.window = webview.create_window(
-            title = f"{cat.name}",
-            width=300,
-            height=300,
-            resizable=False,
-            on_top=True,
-
-            url="./web/index.html"
+                url="./web/index.html"
+            )
         )
 
         # TODO: Create a system with a method that can bind all events to the cat.

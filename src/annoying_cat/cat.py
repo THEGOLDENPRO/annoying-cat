@@ -15,7 +15,10 @@ class Cat:
     name:str
     gender:str
 
-    window:Window|str|None = field(init=False, default=None, repr=False)
+    window:Window = field(repr=False)
+
+    def __post_init__(self) -> None:
+        self.window.events.loaded += self.loaded
 
     def meow(self, meow:Meows=None, vol:float=0.5) -> Cat:
         """Forces the cat to MEOW!"""
@@ -34,18 +37,34 @@ class Cat:
 
     def talk(self, text:str, rm_delay:int = 5) -> Cat:
         """Let's the cat talk. It displays text under the cat, duhhhh! What else did you think."""
-        if not self.window is None:
             
-            self.window.evaluate_js("""
-                var cat_talk_box = document.getElementById("cat_talk_box");
-                cat_talk_box.innerText = "{text}";
+        self.window.evaluate_js(
+            """
+            var cat_talk_box = document.getElementById("cat_talk_box");
+            cat_talk_box.innerText = "{text}";
 
-                setTimeout(function() {
-                    cat_talk_box.innerText = "...";
-                }, {rm_delay})
-                """.replace("{rm_delay}", str(rm_delay * 1000)).replace("{text}", text)
-            )
+            setTimeout(function() {
+                cat_talk_box.innerText = "...";
+            }, {rm_delay})
+            """.format(rm_delay = str(rm_delay * 1000), text = text)
+        )
 
-            annoying_cat_logger.debug(f"Cat '{self.name}' said '{text}'.")
+        annoying_cat_logger.debug(f"Cat '{self.name}' said '{text}'.")
         
         return self
+
+    def set_up(self):
+        """A method ran internally to set up the cat within the html DOM."""
+        
+        # Set cat name in window.
+        self.window.evaluate_js(
+            f"""
+            var cat_name = document.getElementById("cat_name");
+            cat_name.innerText = "{self.name}";
+            """
+        )
+
+    def loaded(self):
+        """This method is ran internally when the cat has been loaded."""
+
+        self.set_up()

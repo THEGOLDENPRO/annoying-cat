@@ -1,0 +1,31 @@
+h1, h2, h3, h4 {
+    color: white
+}
+
+h1 {
+    font-weight: 900;
+    text-align: center;
+    text-shadow: 1px 1px black;
+}
+
+h2 {
+    letter-spacing: 0.05vw;
+    margin: 0.05vw;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 2px 2px black;
+}
+
+h3 {
+    margin: 0.03vw;
+    font-weight: 800;
+    text-align: center;
+    text-shadow: 2px 2px black;
+}
+
+h4 {
+    margin: 0.01vw;
+    font-weight: 500;
+    text-align: center;
+    text-shadow: 1px 1px black;
+}
