@@ -6,7 +6,7 @@ import pyautogui
 from threading import Thread
 from devgoldyutils import Colours
 
-from .logging import add_custom_handler, log, LoggerAdapter
+from devgoldyutils.logging import add_custom_handler, log, LoggerAdapter
 
 LOGGER_NAME = f"{Colours.RED.value}Annoying {Colours.ORANGE.value}Cat{Colours.RESET_COLOUR.value}"
 annoying_cat_logger = add_custom_handler(log.getLogger(LOGGER_NAME)); annoying_cat_logger.setLevel(log.DEBUG)
