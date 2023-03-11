@@ -3,7 +3,7 @@ from __future__ import annotations
 import random
 from webview import Window
 from dataclasses import dataclass, field
-from typing import List, TYPE_CHECKING
+from typing import List, TYPE_CHECKING, Type
 
 from . import annoying_cat_logger
 from .meows import Meows
@@ -20,12 +20,17 @@ class Cat:
     gender:str
 
     window:Window = field(repr=False)
-    events:List[Event] = field(init=False, repr=False)
+    events:List[object] = field(repr=False, default=None)
 
     def __post_init__(self) -> None:
         self.window.events.loaded += self.loaded
 
-        self.events = []
+        if self.events is None:
+            self.events = []
+
+        # Load all events into cat.
+        for event in self.events:
+            event(self).start()
 
     def meow(self, meow:Meows=None, vol:float=0.5) -> Cat:
         """Forces the cat to MEOW!"""

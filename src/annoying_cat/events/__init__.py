@@ -28,9 +28,6 @@ class Event(ABC, Thread):
         self.logger = LoggerAdapter(annoying_cat_logger, prefix=name)
         """⭐The event's logger. 🐈"""
 
-        # Add event to cat's event list.
-        cat.events.append(self)
-
         super().__init__(
             name = name + f" - ({self.cat.name})",
             daemon = True
@@ -44,3 +41,5 @@ class Event(ABC, Thread):
         Each event is ran on a separate thread so blocking operations like while loops are allowed.
         """
         ...
+
+from .no_close import NoClose
