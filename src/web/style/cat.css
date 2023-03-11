@@ -1,5 +1,6 @@
 #cat_name {
     margin-top: 2vw;
+    height: 30px;
 }
 
 .cat_display {
@@ -11,16 +12,24 @@
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    width: 90vw;
-    height: 55vw;
+    margin-bottom: 5px;
+    width: 262px;
+    height: 168px;
 
     opacity: 0; /* Remove this once we got cat art. */
 }
 
 #cat_talk_box {
     display: block;
-    position: relative;
+    position: fixed;
 
-    height: 21vw;
+    width: 100%;
+    height: fit-content;
     overflow: hidden;
+
+    right: 0;
+    left: 0;
+    bottom: 0;
+
+    padding-bottom: 10px;
 }

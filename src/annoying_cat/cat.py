@@ -3,9 +3,13 @@ from __future__ import annotations
 import random
 from webview import Window
 from dataclasses import dataclass, field
+from typing import List, TYPE_CHECKING
 
 from . import annoying_cat_logger
 from .meows import Meows
+
+if TYPE_CHECKING:
+    from .events import Event
 
 previous_meow:Meows = None
 
@@ -16,9 +20,12 @@ class Cat:
     gender:str
 
     window:Window = field(repr=False)
+    events:List[Event] = field(init=False, repr=False)
 
     def __post_init__(self) -> None:
         self.window.events.loaded += self.loaded
+
+        self.events = []
 
     def meow(self, meow:Meows=None, vol:float=0.5) -> Cat:
         """Forces the cat to MEOW!"""
@@ -35,23 +42,28 @@ class Cat:
         previous_meow = meow
         return self
 
-    def talk(self, text:str, rm_delay:int = 5) -> Cat:
-        """Let's the cat talk. It displays text under the cat, duhhhh! What else did you think."""
+    def talk(self, text:str, rm_delay:int = 2) -> Cat:
+        """
+        Let's the cat talk. It displays text under the cat, duhhhh! What else did you think.
+        
+        ⚠ It's recommended to keep the characters below 50!
+        """
             
         self.window.evaluate_js(
             """
             var cat_talk_box = document.getElementById("cat_talk_box");
             cat_talk_box.innerText = "{text}";
 
-            setTimeout(function() {
+            setTimeout(function() {{
                 cat_talk_box.innerText = "...";
-            }, {rm_delay})
+            }}, {rm_delay})
             """.format(rm_delay = str(rm_delay * 1000), text = text)
         )
 
         annoying_cat_logger.debug(f"Cat '{self.name}' said '{text}'.")
         
         return self
+
 
     def set_up(self):
         """A method ran internally to set up the cat within the html DOM."""

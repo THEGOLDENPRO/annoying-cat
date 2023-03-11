@@ -8,6 +8,9 @@ from typing import Dict, overload
 from . import LoggerAdapter, annoying_cat_logger
 from .cat import Cat
 
+# Events
+from .events.no_close import NoClose
+
 class CatGenerator():
     """Cat generator? WTF! Yes we generate cats here, welcome!"""
     def __init__(self) -> None:
@@ -48,7 +51,7 @@ class CatGenerator():
             )
         )
 
-        # TODO: Create a system with a method that can bind all events to the cat.
-        #NoClose(cat).start()
+        # TODO: Create a system with a method that can bind all events to the cat. Idk how to go about this in an appropriate manner.
+        NoClose(cat).start()
 
         return cat

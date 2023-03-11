@@ -21,7 +21,7 @@ class Meows(Enum):
     def play(self, type:str, volume:float):
         """Plays that meow at specified volume."""
         try:
-            sound = mixer.Sound(f"{os.path.abspath('./sounds')}/{type}/{self.name}")
+            sound = mixer.Sound(f"{os.path.abspath('./sounds')}/{type}/{self.value}")
             sound.set_volume(volume)
             sound.play()
             self.logger.debug(f"Played '{self.name}' at volume {volume}.")
