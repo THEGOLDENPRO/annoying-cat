@@ -1,3 +1,4 @@
 from annoying_cat import AnnoyingCat
 
-AnnoyingCat().start()
+annoying_cat = AnnoyingCat()
+annoying_cat.start()

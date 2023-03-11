@@ -5,20 +5,18 @@ import random
 import webview
 from typing import Dict, overload
 
-from . import Cat
-from .js_api import CatApi
+from . import LoggerAdapter, annoying_cat_logger
+from .cat import Cat
 
-from .. import LoggerAdapter, annoying_cat_logger
-from ..no_close import NoClose
+from . import events
 
 class CatGenerator():
     """Cat generator? WTF! Yes we generate cats here, welcome!"""
     def __init__(self) -> None:
-        json_file = open("./cats.json", mode="r")
+        json_file = open("./cat_types.json", mode="r")
 
-        self.cats_dict:Dict[str, str] =  json.load(json_file); json_file.close()
-
-        self.cat_count = len(self.cats_dict)
+        self.cat_types:Dict[str, str] =  json.load(json_file); json_file.close()
+        self.cat_types_count = len(self.cat_types)
 
         self.logger = LoggerAdapter(annoying_cat_logger, prefix="CatGenerator")
     
@@ -29,34 +27,32 @@ class CatGenerator():
 
     @overload
     def create_cat(self, cat_id:str|int) -> Cat:
-        """Creates amd returns cat with that id."""
+        """Creates and returns cat with that id."""
         ...
 
     def create_cat(self, cat_id:str|int = None) -> Cat:
         if cat_id is None:
-            cat_id = random.randint(0, self.cat_count - 1)
+            cat_id = random.randint(0, self.cat_types_count - 1)
 
-        cat_dict = self.cats_dict[f"{cat_id}"]
+        cat_dict = self.cat_types[f"{cat_id}"]
 
         cat = Cat(
             name = cat_dict["name"],
-            gender = cat_dict["gender"]
-        )
-
-        cat.bind_window(
-            webview.create_window(
-                title = f"{cat.name}",
+            gender = cat_dict["gender"],
+            window = webview.create_window(
+                title=cat_dict["name"],
                 width=300,
                 height=300,
                 resizable=False,
                 on_top=True,
 
-                js_api=CatApi(cat),
-
                 url="./web/index.html"
-            )
+            ),
+            events = [
+                events.NoClose
+            ]
         )
 
-        NoClose(cat).start()
+        # TODO: Create a system with a method that can bind all events to the cat. Idk how to go about this in an appropriate manner.
 
         return cat
