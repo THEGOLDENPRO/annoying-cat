@@ -20,4 +20,4 @@ With Annoying Cat, you'll experience the joys of being meowed to madness. With o
   
 </div>
 
-Annoying Cat is currently in development and we need help from Python developers to create more custom events. We may also be on the look out for artists to illustrate the male and female cats in different emotions although we are unable to offer payment due to the open-source nature of the project and our current circumstances, but all contributors will receive proper credit and recognition. If you're a Python developer or an artist with a passion for creating virtual pets, we encourage you to get involved.
+Annoying Cat is currently in development and we need help from Python developers to produce custom events and take the project to the next level. We may also be on the look out for artists to illustrate the male and female cats in different emotions although we are unable to offer payment due to the open-source nature of the project and our current circumstances, but all contributors will receive proper credit and recognition. If you're a Python developer or an artist with a passion for creating virtual pets, we encourage you to get involved.
